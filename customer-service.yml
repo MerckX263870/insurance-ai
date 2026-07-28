@@ -10,3 +10,9 @@ jwt:
 internal:
   api:
     secret: "local-dev-internal-secret"
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Customer Service
+        url: /customer/v3/api-docs
