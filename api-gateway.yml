@@ -61,9 +61,7 @@ app:
       - /customer/webhooks/**
       - /actuator/**
       - /auth/**
-      - /swagger-ui/**
-      - /swagger-ui.html
-      - /v3/api-docs/**
+      - /customer/v3/api-docs/**
 
 jwt:
   secret-key: "local-dev-only-secret-key-change-me-1234567890"
