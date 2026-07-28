@@ -2,13 +2,6 @@ logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{correlationId:-},%X{traceId:-},%X{spanId:-}]"
 
-spring:
-  application:
-    name: api-gateway
-
-  config:
-    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
-
   data:
     redis:
       host: ${REDIS_HOST:localhost}
