@@ -2,6 +2,8 @@ logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{correlationId:-},%X{traceId:-},%X{spanId:-}]"
 
+spring:
+
   data:
     redis:
       host: ${REDIS_HOST:localhost}
@@ -11,6 +13,7 @@ logging:
     gateway:
       server:
         webflux:
+
           default-filters:
             - name: RequestRateLimiter
               args:
@@ -62,19 +65,11 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
+    disable-swagger-default-url: true
 
     urls:
       - name: Customer Service
         url: /customer/v3/api-docs
-
-      # - name: Claim Service
-      #   url: /claims/v3/api-docs
-
-      # - name: Policy Service
-      #   url: /policies/v3/api-docs
-
-      # - name: Notification Service
-      #   url: /notifications/v3/api-docs
 
 app:
   security:
@@ -83,9 +78,6 @@ app:
       - /swagger-ui.html
       - /v3/api-docs/**
       - /customer/v3/api-docs/**
-      - /claims/v3/api-docs/**
-      - /policies/v3/api-docs/**
-      - /notifications/v3/api-docs/**
       - /customer/auth/signup
       - /customer/auth/login
       - /customer/webhooks/**
@@ -108,7 +100,6 @@ management:
   health:
     livenessstate:
       enabled: true
-
     readinessstate:
       enabled: true
 
