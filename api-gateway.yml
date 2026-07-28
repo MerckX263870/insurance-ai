@@ -5,17 +5,13 @@ logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{correlationId:-},%X{traceId:-},%X{spanId:-}]"
 
-springdoc:
-  api-docs:
-    enabled: true
-
-  swagger-ui:
-    enabled: true
-
 spring:
   application:
     name: api-gateway
-    
+
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+
   data:
     redis:
       host: ${REDIS_HOST:localhost}
@@ -25,6 +21,7 @@ spring:
     gateway:
       server:
         webflux:
+
           default-filters:
             - name: RequestRateLimiter
               args:
@@ -34,6 +31,7 @@ spring:
                 key-resolver: "#{@userKeyResolver}"
 
           routes:
+
             - id: customer-service
               uri: lb://CUSTOMER-SERVICE
               predicates:
@@ -45,22 +43,49 @@ spring:
               uri: lb://CLAIM-SERVICE
               predicates:
                 - Path=/claims/**
+              filters:
+                - StripPrefix=1
 
             - id: policy-service
               uri: lb://POLICY-SERVICE
               predicates:
                 - Path=/policies/**
+              filters:
+                - StripPrefix=1
 
             - id: notification-service
               uri: lb://NOTIFICATION-SERVICE
               predicates:
                 - Path=/notifications/**
+              filters:
+                - StripPrefix=1
 
   lifecycle:
     timeout-per-shutdown-phase: 15s
 
 server:
   shutdown: graceful
+
+springdoc:
+  api-docs:
+    enabled: true
+
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+    urls:
+      - name: Customer Service
+        url: /customer/v3/api-docs
+
+      - name: Claim Service
+        url: /claims/v3/api-docs
+
+      - name: Policy Service
+        url: /policies/v3/api-docs
+
+      - name: Notification Service
+        url: /notifications/v3/api-docs
 
 app:
   security:
@@ -72,18 +97,9 @@ app:
       - /claims/v3/api-docs/**
       - /policies/v3/api-docs/**
       - /notifications/v3/api-docs/**
-
-springdoc:
-  swagger-ui:
-    urls:
-      - name: Customer Service
-        url: /customer/v3/api-docs
-      - name: Claim Service
-        url: /claims/v3/api-docs
-      - name: Policy Service
-        url: /policies/v3/api-docs
-      - name: Notification Service
-        url: /notifications/v3/api-docs
+      - /customer/auth/signup
+      - /customer/auth/login
+      - /customer/webhooks/**
 
 jwt:
   secret-key: "local-dev-only-secret-key-change-me-1234567890"
@@ -103,6 +119,7 @@ management:
   health:
     livenessstate:
       enabled: true
+
     readinessstate:
       enabled: true
 
