@@ -65,12 +65,13 @@ server:
 app:
   security:
     public-routes:
-      - /customer/auth/signup
-      - /customer/auth/login
-      - /customer/webhooks/**
+      - /swagger-ui/**
+      - /swagger-ui.html
+      - /v3/api-docs/**
       - /customer/v3/api-docs/**
-      - /customer/swagger-ui/**
-      - /customer/swagger-ui.html
+      - /claims/v3/api-docs/**
+      - /policies/v3/api-docs/**
+      - /notifications/v3/api-docs/**
 
 jwt:
   secret-key: "local-dev-only-secret-key-change-me-1234567890"
