@@ -5,6 +5,13 @@ logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{correlationId:-},%X{traceId:-},%X{spanId:-}]"
 
+springdoc:
+  api-docs:
+    enabled: true
+
+  swagger-ui:
+    enabled: true
+
 spring:
   application:
     name: api-gateway
