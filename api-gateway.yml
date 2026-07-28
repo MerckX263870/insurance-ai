@@ -67,14 +67,14 @@ springdoc:
       - name: Customer Service
         url: /customer/v3/api-docs
 
-      - name: Claim Service
-        url: /claims/v3/api-docs
+      # - name: Claim Service
+      #   url: /claims/v3/api-docs
 
-      - name: Policy Service
-        url: /policies/v3/api-docs
+      # - name: Policy Service
+      #   url: /policies/v3/api-docs
 
-      - name: Notification Service
-        url: /notifications/v3/api-docs
+      # - name: Notification Service
+      #   url: /notifications/v3/api-docs
 
 app:
   security:
