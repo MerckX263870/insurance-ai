@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/customer_db?options=-c%20TimeZone=Asia/Kolkata
+    url: jdbc:postgresql://localhost:5432/customer_db
     username: claimassist
     password: claimassist
 jwt:
