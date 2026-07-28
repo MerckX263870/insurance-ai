@@ -1,7 +1,4 @@
 logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    reactor.netty.http.client: DEBUG
   pattern:
     level: "%5p [${spring.application.name:},%X{correlationId:-},%X{traceId:-},%X{spanId:-}]"
 
@@ -102,7 +99,7 @@ app:
       - /customer/webhooks/**
 
 jwt:
-  secret-key: "local-dev-only-secret-key-change-me-1234567890"
+  secret-key: ${JWT_SECRET:local-dev-only-secret-key-change-me-1234567890}
 
 management:
   endpoints:
