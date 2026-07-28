@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+
 server:
   port: 8081
 spring:
